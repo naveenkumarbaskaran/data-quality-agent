@@ -1,0 +1,68 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "data-quality-agent"
+version = "0.1.0"
+description = "AI-powered data quality agent: automated profiling, anomaly detection, and lineage tracking."
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.10"
+keywords = ["data-quality", "profiling", "anomaly-detection", "llm", "anthropic"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "License :: OSI Approved :: MIT License",
+]
+
+dependencies = [
+    "anthropic>=0.40.0",
+    "click>=8.1",
+    "rich>=13.0",
+    "pandas>=2.0",
+    "numpy>=1.24",
+    "pyarrow>=14.0",   # parquet support
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "pytest-mock>=3.12",
+    "ruff>=0.4",
+    "mypy>=1.10",
+    "pandas-stubs",
+]
+
+[project.scripts]
+dq-agent = "dq_agent.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/your-org/data-quality-agent"
+Repository = "https://github.com/your-org/data-quality-agent"
+Issues = "https://github.com/your-org/data-quality-agent/issues"
+
+[tool.hatch.build.targets.wheel]
+packages = ["dq_agent"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "N", "UP", "B", "SIM"]
+ignore = ["E501"]
+
+[tool.mypy]
+python_version = "3.10"
+strict = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
